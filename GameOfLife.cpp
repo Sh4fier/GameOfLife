@@ -49,31 +49,80 @@ int main()
         }         
         cout << endl;
         }
-
+bool Nnet[width][height];
+int liveCounter = 0 ;
+int pocetSimulacii;
+cout << "zadaj pocet opakovani: " ;
+cin >> pocetSimulacii ;
+for (int z=0 ; z<pocetSimulacii ; z++) //count of simulations
+    {
+    for (int x=0 ; x < width ; x++ )
+        {
+        for (int y=0 ; y < height ; y++)
+            {
+            
+               if (net[x][y+1])
+               {
+                  liveCounter++;
+               }
+               if (net[x+1][y])
+               {
+                   liveCounter++;
+               }
+               if (net[x][y-1])
+               {
+                liveCounter++;
+               }
+               if (net[x-1][y])
+               {
+                liveCounter++;
+               }
+               if (net[x-1][y+1])
+               {
+                liveCounter++;
+               }
+               if (net[x-1][y-1])
+               {
+                liveCounter++;
+               }
+               if (net[x+1][y+1])
+               {
+                liveCounter++;
+               }
+               if (net[x+1][y-1])
+               {
+                liveCounter++;
+               }
+               if ((liveCounter>3) && (liveCounter<6))
+               {
+                   Nnet[x][y] = true;
+               }
+               else
+               {
+                   Nnet[x][y] = false;
+               }
+               
+            }
+        }
+     //net[x][y] =  Nnet[x][y];
+    Nnet[x][y] = net[x][y];
+    liveCounter=0;
     for (int x=0 ; x < width ; x++ )
         {
         for (int y=0 ; y < height ; y++)
         {
-            if (net[x][y])
+            if (net[x][y]) 
             {
-               if (net[x][y+1])
-               {
-                  
-               }
-               if (net[x+1][y])
-               {
-                   
-               }
-               if (net[x][y-1])
-               {
-                
-               }
-               if (net[x-1][y])
-               {
-                
-               }
+            cout<< " O " ;
             }
+            else 
+            {
+            cout<< " X " ;
+            } 
         }
-        }
+        cout << endl;          
+    } 
+    cout << endl;
+    }
     return 0;
 }
