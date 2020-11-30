@@ -16,113 +16,89 @@ int main()
     cin >> file ;
     cout << file <<endl ;
     ifstream readf(file);
-        if (readf.is_open())
-        {
-         string line,firstint,secondint;
-         while (getline(readf,line))
-            {
-            stringstream ss(line);
-            getline(ss,firstint,' ');
-            getline(ss,secondint,' ');
-            x = stoi(firstint);
-            y = stoi(secondint);
-            net[x][y] = true ;
-            }
-
+        if (readf.is_open()){
+            string line,firstint,secondint;
+            while (getline(readf,line)){
+                stringstream ss(line);
+                getline(ss,firstint,' ');
+                getline(ss,secondint,' ');
+                x = stoi(firstint);
+                y = stoi(secondint);
+                net[x][y] = true ;
+            }   
         }
-            else 
-            {
-             cout<< "No such file" <<endl;
+            else{ 
+                cout<< "No such file" <<endl;
             }
-    for (int x=0 ; x < width ; x++ )
-        {
-        for (int y=0 ; y < height ; y++)
-        {
-            if (net[x][y]) 
-            {
-            cout<< " O " ;
-            }
-            else 
-            {
-            cout<< " X " ;
-            } 
-        }         
-        cout << endl;
+        for (int x=0 ; x < width ; x++ ){
+            for (int y=0 ; y < height ; y++){
+                if (net[x][y]){
+                    cout<< " O " ;
+                }
+                else{ 
+                    cout<< " X " ;
+                } 
+            }         
+            cout << endl;
         }
 bool Nnet[width][height];
 int liveCounter = 0 ;
 int pocetSimulacii;
 cout << "zadaj pocet opakovani: " ;
 cin >> pocetSimulacii ;
-for (int z=0 ; z<pocetSimulacii ; z++) //count of simulations
-    {
-    for (int x=0 ; x < width ; x++ )
-        {
-        for (int y=0 ; y < height ; y++)
-            {
-            
-               if (net[x][y+1])
-               {
-                  liveCounter++;
-               }
-               if (net[x+1][y])
-               {
-                   liveCounter++;
-               }
-               if (net[x][y-1])
-               {
+for (int z=0 ; z<pocetSimulacii ;z++ ) {//count of simulations
+    for (int x=1 ; x < width-1 ; x++ ){
+        for (int y=1 ; y < height-1 ; y++){
+            liveCounter=0;
+            if (net[x][y+1]){
                 liveCounter++;
-               }
-               if (net[x-1][y])
-               {
+            }
+            if (net[x+1][y]){
                 liveCounter++;
-               }
-               if (net[x-1][y+1])
-               {
+            }
+            if (net[x][y-1]){
                 liveCounter++;
-               }
-               if (net[x-1][y-1])
-               {
+            }
+            if (net[x-1][y]){
                 liveCounter++;
-               }
-               if (net[x+1][y+1])
-               {
+            }
+            if (net[x-1][y+1]){
                 liveCounter++;
-               }
-               if (net[x+1][y-1])
-               {
+            }
+            if (net[x-1][y-1]){
                 liveCounter++;
-               }
-               if ((liveCounter>3) && (liveCounter<6))
-               {
-                   Nnet[x][y] = true;
-               }
-               else
-               {
-                   Nnet[x][y] = false;
-               }
-               
+            }
+            if (net[x+1][y+1]){
+                liveCounter++;
+            }
+            if (net[x+1][y-1]){
+                liveCounter++;
+            }
+            if ((liveCounter>3) && (liveCounter<6)){
+                Nnet[x][y] = true;
+            }
+            else{
+                Nnet[x][y] = false;
             }
         }
-     //net[x][y] =  Nnet[x][y];
-    Nnet[x][y] = net[x][y];
-    liveCounter=0;
-    for (int x=0 ; x < width ; x++ )
-        {
-        for (int y=0 ; y < height ; y++)
-        {
-            if (net[x][y]) 
-            {
-            cout<< " O " ;
+    }
+        for (int x=1 ; x < width-1 ; x++ ){
+            for (int y=1 ; y < height-1 ; y++){
+                net[x][y] =  Nnet[x][y];
             }
-            else 
-            {
-            cout<< " X " ;
+        }
+    for (int x=0 ; x < width ; x++ ){
+        for (int y=0 ; y < height ; y++){
+            if (net[x][y]) {
+                cout<< " O " ;
+            }
+            else{
+                cout<< " X " ;
             } 
         }
         cout << endl;          
     } 
     cout << endl;
-    }
+}
     return 0;
 }
