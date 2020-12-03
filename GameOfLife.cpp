@@ -43,10 +43,10 @@ int main()
         }
 bool Nnet[width][height];
 int liveCounter = 0 ;
-int pocetSimulacii;
-cout << "zadaj pocet opakovani: " ;
-cin >> pocetSimulacii ;
-for (int z=0 ; z<pocetSimulacii ;z++ ) {//count of simulations
+int simCount;
+cout << "number of generations: " ;
+cin >> simCount ;
+for (int z=0 ; z<simCount ;z++ ) {//count of simulations
     for (int x=1 ; x < width-1 ; x++ ){
         for (int y=1 ; y < height-1 ; y++){
             liveCounter=0;
@@ -82,11 +82,11 @@ for (int z=0 ; z<pocetSimulacii ;z++ ) {//count of simulations
             }
         }
     }
-        for (int x=1 ; x < width-1 ; x++ ){
-            for (int y=1 ; y < height-1 ; y++){
-                net[x][y] =  Nnet[x][y];
-            }
+    for (int x=1 ; x < width-1 ; x++ ){
+        for (int y=1 ; y < height-1 ; y++){
+            net[x][y] =  Nnet[x][y];
         }
+    }
     for (int x=0 ; x < width ; x++ ){
         for (int y=0 ; y < height ; y++){
             if (net[x][y]) {
