@@ -8,11 +8,18 @@ using namespace std;
 int main()
 {
     string file;
-    int width = 8;
-    int height = 8; 
+    int width=8 ;
+    int height=8 ; 
     int x,y ;
-    bool net[width][height] = {}; 
+    cout << "how large field you want?"<< endl;
+    cout << "for X :";
+    cin >> width;
+    width=width+2;
+    cout << "for Y :";
+    cin >> height;
+    height=height+2;
     cout << "file name ";
+    bool net[width][height] = {}; 
     cin >> file ;
     cout << file <<endl ;
     ifstream readf(file);
@@ -30,8 +37,8 @@ int main()
             else{ 
                 cout<< "No such file" <<endl;
             }
-        for (int x=0 ; x < width ; x++ ){
-            for (int y=0 ; y < height ; y++){
+        for (int x=1 ; x < width-1 ; x++ ){
+            for (int y=1 ; y < height-1 ; y++){
                 if (net[x][y]){
                     cout<< " O " ;
                 }
@@ -46,7 +53,7 @@ int liveCounter = 0 ;
 int simCount;
 cout << "number of generations: " ;
 cin >> simCount ;
-for (int z=0 ; z<simCount ;z++ ) {//count of simulations
+for (int z=0 ; z<simCount ;z++ ){                   //count of simulations
     for (int x=1 ; x < width-1 ; x++ ){
         for (int y=1 ; y < height-1 ; y++){
             liveCounter=0;
@@ -74,11 +81,16 @@ for (int z=0 ; z<simCount ;z++ ) {//count of simulations
             if (net[x+1][y-1]){
                 liveCounter++;
             }
-            if ((liveCounter>3) && (liveCounter<6)){
+            if ((liveCounter>=2) && (liveCounter<=4)){
                 Nnet[x][y] = true;
             }
             else{
                 Nnet[x][y] = false;
+            if (liveCounter==3){
+                Nnet[x][y] = true;
+            }
+            if (liveCounter>3)
+            Nnet[x][y] = false;
             }
         }
     }
@@ -87,8 +99,8 @@ for (int z=0 ; z<simCount ;z++ ) {//count of simulations
             net[x][y] =  Nnet[x][y];
         }
     }
-    for (int x=0 ; x < width ; x++ ){
-        for (int y=0 ; y < height ; y++){
+    for (int x=1 ; x < width-1 ; x++ ){
+        for (int y=1 ; y < height-1 ; y++){
             if (net[x][y]) {
                 cout<< " O " ;
             }
@@ -100,5 +112,6 @@ for (int z=0 ; z<simCount ;z++ ) {//count of simulations
     } 
     cout << endl;
 }
+   
     return 0;
 }
