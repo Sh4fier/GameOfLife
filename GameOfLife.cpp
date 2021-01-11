@@ -89,7 +89,7 @@ for (int z=0 ; z<simCount ;z++ ){                   //count of simulations
             if (liveCounter==3){
                 Nnet[x][y] = true;
             }
-            if (liveCounter>3)
+            if (liveCounter>4)
             Nnet[x][y] = false;
             }
         }
